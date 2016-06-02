@@ -6,8 +6,31 @@
 
 set -euo pipefail
 
-URL="https://www.privateinternetaccess.com/openvpn/openvpn.zip"
+BASE_URL="https://www.privateinternetaccess.com/openvpn"
 OUT="cros-pia.zip"
+
+case "${1:-}" in
+	--pia-ip)
+		URL="$BASE_URL/openvpn-ip.zip"
+		shift
+		;;
+# ONC doesn't handle "lport"
+#	--pia-ip-lport)
+#		URL="$BASE_URL/openvpn-ip-lport.zip"
+#		shift
+#		;;
+	--pia-tcp)
+		URL="$BASE_URL/openvpn-tcp.zip"
+		shift
+		;;
+	--pia-ip-tcp)
+		URL="$BASE_URL/openvpn-ip-tcp.zip"
+		shift
+		;;
+	*)
+		URL="$BASE_URL/openvpn.zip"
+		;;
+esac
 
 rm -rf tmp
 mkdir tmp

@@ -48,7 +48,11 @@ delete.
 Rebuilding the ONC files by hand
 ================================
 
-Running `./build_all.sh` will download the default OpenVPN configuration
+First, clone this repo on a Linux machine:
+
+`git clone https://chromium.googlesource.com/experimental/cros-pia`
+
+Then run `./build_all.sh` to download the default OpenVPN configuration
 files from
 [the official PIA site](https://www.privateinternetaccess.com/pages/client-support/),
 convert them into ONC format, and create `cros-pia.zip` in the current
@@ -62,6 +66,17 @@ you never need to manually enter them on the Chromebook, use:
 To manually convert a single configuration, use:
 
 `./ovpn_to_onc.py "US California.ovpn"`
+
+To download an alternate set of OVPN files, specify the appropriate flag as
+the first argument:
+
+`./build_all.sh --pia-tcp`
+
+The supported flags are:
+
+ * `--pia-ip`: Connect via IP address instead of server hostname.
+ * `--pia-tcp`: Connect over 443/tcp instead of 1194/udp.
+ * `--pia-ip-tcp`: Same as above, but connect via IP address.
 
 
 Limitations and notes
