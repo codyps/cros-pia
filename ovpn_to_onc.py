@@ -114,15 +114,16 @@ for ovpn_file in args['ovpn_file']:
                 "Proto": proto,
                 "RemoteCertTLS": "server",
                 "ServerCARef": cert_guid,
-                "UserAuthenticationType": "Password"
+                "UserAuthenticationType": "Password",
+                "SaveCredentials": True,
             }
         }
     }
 
     if args["username"]:
-        config["VPN"]["Username"] = args["username"]
+        config["VPN"]["OpenVPN"]["Username"] = args["username"]
     if args["password"]:
-        config["VPN"]["Password"] = args["password"]
+        config["VPN"]["OpenVPN"]["Password"] = args["password"]
 
     write_onc(prefix, {cert_guid: cert}, {baseprefix: config})
 
